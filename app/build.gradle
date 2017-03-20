@@ -1,0 +1,81 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.4.0'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.example.mobile.dagger2test"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //try to remove this later
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+def okHttpVersion = "3.5.0"
+def retrofitVersion = "2.1.0"
+def gsonVersion = "1.7.2"
+def timberVersion = "4.4.0"
+def rxJavaVersion = "1.2.4"
+def rxAndroidVersion = "1.2.1"
+def autoValueVersion = "1.3"
+def icePickVersion = "3.1.0"
+def rxBindingVersion = "1.0.0"
+def androidThingsVersion = "0.1-devpreview"
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    testCompile 'junit:junit:4.12'
+
+    compile 'com.google.dagger:dagger:2.8'
+    apt 'com.google.dagger:dagger-compiler:2.8'
+
+    compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
+
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    compile group: 'com.google.code.gson', name: 'gson', version: "$gsonVersion"
+
+    compile "com.jakewharton.timber:timber:$timberVersion"
+
+    compile "io.reactivex:rxjava:$rxJavaVersion"
+    compile "io.reactivex:rxandroid:$rxAndroidVersion"
+
+    compile group: 'com.google.auto.value', name: 'auto-value', version: "$autoValueVersion"
+
+    compile "com.jakewharton.rxbinding:rxbinding:$rxBindingVersion"
+
+    compile "frankiesardo:icepick:$icePickVersion"
+    provided "frankiesardo:icepick-processor:$icePickVersion"
+
+    provided "com.google.android.things:androidthings:$androidThingsVersion"
+}
