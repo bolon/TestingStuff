@@ -6,6 +6,7 @@ List of things done in this project :
 <ol>
   <li>DI Using dagger and butterknife</li>
   <li>Use rx to demonstrate things</li>
+  <li>Lambda ftw</li>
 </ol>
 
 <h2>Testing</h2> 
